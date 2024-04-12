@@ -6,12 +6,21 @@ module HexletCode
           content = block.call
           "<#{tag}#{build_attributes(attributes)}>#{content}</#{tag}>"
         else
-          "<#{tag}#{build_attributes(attributes)}>"
+          if single_tag?(tag)
+            "<#{tag}#{build_attributes(attributes)}>"
+          else
+            "<#{tag}#{build_attributes(attributes)}></#{tag}>"
+          end
         end
       end
 
       def build_attributes(attributes)
-        attributes.map { |key, value| " #{key}='#{value}'" }.join
+        return '' if attributes.empty?
+        " " + attributes.map { |key, value| " #{key}=\"#{value}\"" }.join('')
+      end
+
+      def single_tag?(tag)
+        %w(br img input).include?(tag)
       end
     end
   end

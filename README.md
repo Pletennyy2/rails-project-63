@@ -1,12 +1,12 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/Pletennyy2/rails-project-63/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Pletennyy2/rails-project-63/actions)
 
-### Build status:
-[![Build Status](https://travis-ci.com/username/projectname.svg?branch=main)](https://travis-ci.com/username/projectname) 
+### CI:
+[![CI](https://github.com/Pletennyy2/rails-project-63/actions/workflows/ci.yml/badge.svg)](https://github.com/Pletennyy2/rails-project-63/actions)
 
 # HexletCode
 
-TODO: Delete this and the text below, and describe your gem
+
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/hexlet_code`. To experiment with that code, run `bin/console` for an interactive prompt.
 
