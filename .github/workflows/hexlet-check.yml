@@ -8,9 +8,8 @@ name: hexlet-check
 on:
   push:
     branches:
-      - '**'
-    tags:
-      - '**'
+      - main
+
 
 jobs:
   build:
@@ -22,3 +21,17 @@ jobs:
         uses: hexlet/project-action@release
         with:
           hexlet-id: ${{ secrets.HEXLET_ID }}
+
+      - name: Set up Ruby 3.3
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.3.0
+
+      - name: Install dependencies
+        run: make install
+
+      - name: Run Rubocop
+        run: make lint
+
+      - name: Run Test
+        run: make test
