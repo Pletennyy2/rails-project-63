@@ -6,5 +6,5 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'rake', '~> 13.0'
-gem 'hexlet_code', github: 'pletennyy2/hexlet_code'
+gem 'hexlet_code', github: 'pletennyy2/rails-project-63'
 gem 'minitest'
