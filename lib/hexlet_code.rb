@@ -2,13 +2,13 @@
 
 require_relative 'hexlet_code/version'
 
-
 module HexletCode
   autoload :Tag, 'hexlet_code/tag'
+
   def self.form_for(model, options = {})
     @model = model
     @options = options
-    result = "<form action='#{@options[:url]}' method='post'>"
+    result = "<form action='#{@options[:url]}' method='#{@options[:method]}' class='hexlet-form'>"
     yield(self) if block_given?
     result += "</form>"
     result
@@ -22,7 +22,7 @@ module HexletCode
 
     input_attrs.merge!(options.except(:as))
 
-    label = "<label for='#{attribute}'>#{attribute.capitalize}</label>"
+    label = "<label for='#{attribute}'>#{options[:label] || attribute.capitalize}</label>"
     input = if input_type == :text
               "<textarea #{build_attributes(input_attrs)}>#{value}</textarea>"
             else
