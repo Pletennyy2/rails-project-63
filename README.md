@@ -5,43 +5,46 @@
 [![CI](https://github.com/Pletennyy2/rails-project-63/actions/workflows/ci.yml/badge.svg)](https://github.com/Pletennyy2/rails-project-63/actions)
 
 # HexletCode
+This is a gem HTML-form generator to simplify the creation of html forms when working with html templates. 
+Save your time when developing web applications
 
-
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/hexlet_code`. To experiment with that code, run `bin/console` for an interactive prompt.
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
+Add this gem to your Ruby on Rails application's Gemfile. Specify it in the Gemfile under the gem section like this:
 
-Install the gem and add to the application's Gemfile by executing:
+```gem 'hexlet_code', path: 'path_to_your_hexlet_code_gem'```
 
-    $ bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+After that, run the bundle install command in the terminal to install the hexlet_code gem in your application.
 
-If bundler is not being used to manage dependencies, install the gem by executing:
-
-    $ gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+Then, you can use the form_for method and other methods from the HexletCode module in your Ruby on Rails controllers and views
 
 ## Usage
 
-TODO: Write usage instructions here
+Here is how you can use your code in the UsersController to create a form in the new.html.erb view:
 
-## Development
+```
+# app/controllers/users_controller.rb
+class UsersController < ApplicationController
+  def new
+    @user = User.new
+    @form_html = HexletCode.form_for(@user, url: users_path) do |f|
+      f.input :name, placeholder: 'Enter your name'
+      f.input :email, type: 'email', placeholder: 'Enter your email'
+      f.submit
+    end
+  end
+end 
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+``` 
+<!-- app/views/users/new.html.erb -->
+<h1>New User</h1>
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+<%= @form_html %>
+```
+In this example, the UsersController creates a new instance of a user @user and generates a form using the HexletCode.form_for method. The form will contain two input fields for name and email, as well as a submit button. The new.html.erb view then displays the generated form on the page.
 
-## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/hexlet_code. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/hexlet_code/blob/master/CODE_OF_CONDUCT.md).
-
-## License
-
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-
-## Code of Conduct
-
-Everyone interacting in the HexletCode project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/hexlet_code/blob/master/CODE_OF_CONDUCT.md).
 
 

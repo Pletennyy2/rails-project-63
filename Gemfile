@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in hexlet_code.gemspec
 gemspec
 
-gem 'rake', '~> 13.0'
-gem 'minitest'
-gem 'rubocop', require: false
 gem 'activesupport'
+gem 'minitest'
+gem 'rake', '~> 13.0'
+gem 'rubocop', require: false
