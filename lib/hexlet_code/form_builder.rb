@@ -23,12 +23,12 @@ module HexletCode
     end
 
     def submit(value = 'Save')
-      @fields << Tag.build('input', type: 'submit', value:)
+      @fields << Tag.build('input', type: 'submit', value: value)
     end
 
-    def method_missing(method_name, *, &)
+    def method_missing(method_name, *args, &block)
       if HexletCode.respond_to?(method_name)
-        HexletCode.send(method_name, *, &)
+        HexletCode.send(method_name, *args, &block)
       else
         super
       end

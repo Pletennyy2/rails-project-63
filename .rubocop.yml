@@ -19,7 +19,7 @@ Gemspec/RequiredRubyVersion:
 Metrics/MethodLength:
   Enabled: false
 
-Style/EndOfLine:
+Layout/EndOfLine:
   EnforcedStyle: lf
 
 Style/FrozenStringLiteralComment:
@@ -37,5 +37,9 @@ Style/StringLiterals:
 Layout/LineLength:
   Enabled: false
 
+Style/HashSyntax:
+  EnforcedShorthandSyntax: never
 
+Style/ArgumentsForwarding:
+  Enabled: false
 # END

@@ -7,14 +7,14 @@
 module HexletCode
   autoload :Tag, 'hexlet_code/tag'
   autoload :FormBuilder, 'hexlet_code/form_builder'
-  def self.form_for(entity, url: '#', &)
+  def self.form_for(entity, url: '#', &block)
     form_attributes = { action: url, method: 'post' }
     form_attributes_str = form_attributes.map { |key, value| %(#{key}="#{value}") }.join(' ')
 
     form_tag = "<form #{form_attributes_str}>"
 
     form_builder = FormBuilder.new(entity, form_tag, self)
-    form_builder.instance_eval(&)
+    form_builder.instance_eval(&block)
 
     fields_html = form_builder.fields.join("\n")
 
