@@ -6,7 +6,7 @@ module HexletCode
   class FormBuilder
     attr_reader :form_body
 
-    def initialize(entity, **attributes)
+    def initialize(_entity, **attributes)
       @form_body = {
         inputs: [],
         submit: { options: nil },
