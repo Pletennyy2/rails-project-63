@@ -4,38 +4,22 @@
 
 module HexletCode
   class FormBuilder
-    attr_reader :fields
+    attr_reader :form_body
 
-    def initialize(entity, form_tag, form_builder)
-      @entity = entity
-      @fields = []
-      @form_builder = form_builder
-      @form_tag = form_tag
+    def initialize(entity, **attributes)
+      @form_body = {
+        inputs: [],
+        submit: { options: nil },
+        form_options: { action: attributes[:url], method: 'post' }.merge(attributes.except(:url, :method))
+      }
     end
 
     def input(field_name, **attributes)
-      @fields << Tag.build('input', type: 'text', name: field_name, value: @entity.public_send(field_name),
-                                    **attributes)
-    end
-
-    def textarea(field_name, **attributes)
-      @fields << Tag.build('textarea', name: field_name, **attributes) { @entity.public_send(field_name) }
+      @form_body[:inputs] << { type: 'text', name: field_name, **attributes }
     end
 
     def submit(value = 'Save')
-      @fields << Tag.build('input', type: 'submit', value: value)
-    end
-
-    def method_missing(method_name, *args, &block)
-      if HexletCode.respond_to?(method_name)
-        HexletCode.send(method_name, *args, &block)
-      else
-        super
-      end
-    end
-
-    def respond_to_missing?(method_name, include_private = false)
-      HexletCode.respond_to?(method_name) || super
+      @form_body[:submit] = { value: value }
     end
   end
 end
