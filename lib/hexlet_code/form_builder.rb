@@ -21,7 +21,7 @@ module HexletCode
     end
 
     def submit(value = 'Save')
-      @form_body[:submit] = { value: value }
+      @form_body[:submit] = { value: value, type: 'submit' }
     end
   end
 end
