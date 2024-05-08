@@ -14,7 +14,11 @@ module HexletCode
 
     def self.render_input(input)
       label = Tag.build('label', for: input[:name]) { input[:label][:value] }
-      input_tag = Tag.build('input', **input.except(:label))
+      input_tag = if input[:type] == 'textarea'
+                    Tag.build('textarea', **input.except(:label)) { '' }
+                  else
+                    Tag.build('input', **input.except(:label))
+                  end
 
       "#{label}\n#{input_tag}"
     end
