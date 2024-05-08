@@ -9,15 +9,18 @@ module HexletCode
     def initialize(_entity, **attributes)
       @form_body = {
         inputs: [],
-        submit: { options: nil },
-        form_options: { action: attributes[:url], method: 'post' }.merge(attributes.except(:url, :method))
+        submit: nil,
+        attributes: {
+          action: attributes[:action] || attributes[:url],
+          method: attributes[:method]
+        }.merge(attributes.except(:url, :method))
       }
     end
 
     def input(field_name, **attributes)
       as = attributes.delete(:as) || :text
       label_text = field_name.to_s.capitalize
-      @form_body[:inputs] << { type: as.to_s, name: field_name, label: label_text, **attributes }
+      @form_body[:inputs] << { type: as.to_s, name: field_name, label: { value: label_text }, **attributes }
     end
 
     def submit(value = 'Save')
