@@ -13,7 +13,8 @@ module HexletCode
         attributes: {
           action: attributes[:action] || attributes[:url],
           method: attributes[:method]
-        }.merge(attributes.except(:url, :method))
+        }.merge(attributes.except(:url, :method)),
+        form_options: {} # Добавляем пустой хэш с ключом :form_options
       }
     end
 
