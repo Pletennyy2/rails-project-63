@@ -5,11 +5,18 @@
 module HexletCode
   class FormRender
     def self.render_html(form_body)
-      form_attributes = form_body[:attributes] # обновляем это
-      inputs = form_body[:inputs].map { |input| Tag.build('input', **input) }.join("\n")
+      form_attributes = form_body[:attributes]
+      inputs = form_body[:inputs].map { |input| render_input(input) }.join("\n")
       submit = Tag.build('input', **form_body[:submit])
 
-      Tag.build('form', **form_attributes) { "#{inputs}\n#{submit}" } # обновляем это
+      Tag.build('form', **form_attributes) { "#{inputs}\n#{submit}" }
+    end
+
+    def self.render_input(input)
+      label = Tag.build('label', for: input[:name]) { input[:label][:value] }
+      input_tag = Tag.build('input', **input.except(:label))
+
+      "#{label}\n#{input_tag}"
     end
   end
 end
