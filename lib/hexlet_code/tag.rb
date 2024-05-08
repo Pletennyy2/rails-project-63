@@ -4,16 +4,14 @@
 
 module HexletCode
   module Tag
+    SINGLE_TAGS = %w[input img br].freeze
     class << self
       def build(tag, **attributes, &block)
-        if block_given?
-          content = block.call
-          "<#{tag}#{build_attributes(attributes)}>#{content}</#{tag}>"
-        elsif single_tag?(tag)
-          "<#{tag}#{build_attributes(attributes)}>"
-        else
-          "<#{tag}#{build_attributes(attributes)}></#{tag}>"
-        end
+        build_attributes = build_attributes(attributes)
+        return "<#{tag}#{build_attributes}>\n" if single_tag?(tag)
+
+        content = block_given? ? yield : attributes.fetch(:content, '')
+        "<#{tag}#{build_attributes}>#{content}</#{tag}>\n"
       end
 
       def build_attributes(attributes)
@@ -23,7 +21,7 @@ module HexletCode
       end
 
       def single_tag?(tag)
-        %w[br img input].include?(tag)
+        SINGLE_TAGS.include?(tag)
       end
     end
   end
