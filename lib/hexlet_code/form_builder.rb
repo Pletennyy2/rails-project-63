@@ -16,7 +16,7 @@ module HexletCode
 
     def input(field_name, **attributes)
       as = attributes.delete(:as) || :text
-      label_text = field_name.to_s.capitalize # Генерация текста метки на основе названия поля
+      label_text = field_name.to_s.capitalize
       @form_body[:inputs] << { type: as.to_s, name: field_name, label: label_text, **attributes }
     end
 
