@@ -18,24 +18,26 @@ module HexletCode
       }
     end
 
-    def input(field_name, **attributes)
-      as = attributes.delete(:as) || :text
-      label_text = field_name.to_s.capitalize
-      @form_body[:inputs] << { type: as.to_s, name: field_name, label: { value: label_text }, **attributes, class: attributes[:class] }
+    # def input(field_name, **attributes)
+    #   as = attributes.delete(:as) || :text
+    #   label_text = field_name.to_s.capitalize
+    #   @form_body[:inputs] << { type: as.to_s, name: field_name, label: { value: label_text }, **attributes, class: attributes[:class] }
+    # end
+    #
+    def input(name, options = {})
+      @form_body[:inputs] << build_input(name, options)
     end
 
     def submit(value = 'Save')
       @form_body[:submit] = { value: value, type: 'submit' }
     end
 
-    def method_missing(method_name, *args, &)
-      raise NoMethodError, "undefined method `#{method_name}` for #{entity.inspect}" if method_name.to_s.start_with?('input')
+    private
 
-      super
-    end
-
-    def respond_to_missing?(method_name, include_private = false)
-      method_name.to_s.start_with?('input') || super
+    def build_input(name, options)
+      as = options.delete(:as) || :text
+      label_text = name.to_s.capitalize
+      { type: as.to_s, name: name, label: { value: label_text }, **options, class: options[:class] }
     end
   end
 end
