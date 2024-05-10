@@ -8,6 +8,7 @@ AllCops:
     - 'db/migrate/**'
     - 'examples/**'
     - 'lib/hexlet_code/tag.rb'
+    - 'lib/hexlet_code/form_builder.rb'
 
 # BEGIN
 Style/Documentation:

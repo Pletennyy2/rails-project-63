@@ -27,5 +27,15 @@ module HexletCode
     def submit(value = 'Save')
       @form_body[:submit] = { value: value, type: 'submit' }
     end
+
+    def method_missing(method_name, *args, &)
+      raise NoMethodError, "undefined method `#{method_name}` for #{entity.inspect}" if method_name.to_s.start_with?('input')
+
+      super
+    end
+
+    def respond_to_missing?(method_name, include_private = false)
+      method_name.to_s.start_with?('input') || super
+    end
   end
 end
