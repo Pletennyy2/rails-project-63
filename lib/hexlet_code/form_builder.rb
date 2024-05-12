@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 # lib/hexlet_code/form_builder.rb
-
 module HexletCode
   class FormBuilder
     attr_reader :form_body
@@ -16,10 +15,10 @@ module HexletCode
       }
     end
 
-    def input(name, options = {})
-      input_type = options.delete(:as) || :text
+    def input(name, attributes = {})
+      input_type = attributes.delete(:as) || :text
       input_class = HexletCode::Inputs.const_get(input_type.to_s.capitalize)
-      @form_body[:inputs] << input_class.build(name, options)
+      @form_body[:inputs] << input_class.build(name, attributes)
     end
 
     def submit(value = 'Save')

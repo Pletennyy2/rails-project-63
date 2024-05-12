@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 # lib/hexlet_code/form_render.rb
-
 module HexletCode
   class FormRender
     def self.render_html(form_body)
