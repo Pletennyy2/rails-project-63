@@ -24,6 +24,11 @@ module HexletCode
     def submit(value = 'Save')
       @form_body[:submit] = { type: 'submit',  value: value }
     end
+
+    def call(user)
+      method_name = @form_body[:submit][:type]
+      send(method_name, user)
+    end
   end
 end
 

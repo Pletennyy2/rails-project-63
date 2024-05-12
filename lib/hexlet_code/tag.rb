@@ -16,6 +16,9 @@ module HexletCode
             elsif tag == 'textarea' # если это textarea, то нужно добавить атрибут type="textarea"
               build_attributes = build_attributes(attributes.merge(type: 'textarea'))
               "<#{tag} #{build_attributes}>#{block_given? ? yield : attributes[:content] || ''}</#{tag}>"
+            elsif tag == 'label'
+              build_attributes = build_attributes(attributes.merge(text: attributes[:text].strip))
+              "<#{tag} #{build_attributes}>#{block_given? ? yield : attributes[:content] || ''}</#{tag}>"
             else # в остальных случаях
               content = block_given? ? yield : attributes[:content] || ''
               indented_content = content.gsub("\n", "\n    ")  # добавляем отступ в 4 пробела между тегами
