@@ -16,7 +16,7 @@ module HexletCode
             elsif tag == 'textarea' # если это textarea, то нужно добавить атрибут type="textarea"
               build_attributes = build_attributes(attributes.merge(type: 'textarea'))
               "<#{tag} #{build_attributes}>#{block_given? ? yield : attributes[:content] || ''}</#{tag}>"
-            elsif tag == 'label'
+            elsif tag == 'label' # если это label, то нужно добавить атрибут text
               build_attributes = build_attributes(attributes.merge(text: attributes[:text].strip))
               "<#{tag} #{build_attributes}>#{block_given? ? yield : attributes[:content] || ''}</#{tag}>"
             else # в остальных случаях
