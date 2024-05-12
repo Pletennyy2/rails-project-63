@@ -8,10 +8,10 @@ module HexletCode
     class << self
       def build(tag, **attributes, &block)
         build_attributes = build_attributes(attributes)
-        return "<#{tag}#{build_attributes}>\n" if single_tag?(tag)
+        return "<#{tag}#{build_attributes}>" if single_tag?(tag)
 
-        content = block_given? ? yield : attributes.fetch(:content, '')
-        "<#{tag}#{build_attributes}>#{content}</#{tag}>\n"
+        content = block_given? ? yield : attributes[:value] || ''
+        "<#{tag}#{build_attributes}>#{content}</#{tag}>"
       end
 
       def build_attributes(attributes)

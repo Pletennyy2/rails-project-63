@@ -9,6 +9,7 @@ AllCops:
     - 'examples/**'
     - 'lib/hexlet_code/tag.rb'
     - 'lib/hexlet_code/form_builder.rb'
+    - 'lib/hexlet_code/form_render.rb'
 
 # BEGIN
 Style/Documentation:

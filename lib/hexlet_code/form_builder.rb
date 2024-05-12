@@ -7,37 +7,29 @@ module HexletCode
     attr_reader :form_body
 
     def initialize(_entity, **attributes)
+      action = attributes.fetch(:url, '#')
+      method = attributes.fetch(:method, 'post')
       @form_body = {
         inputs: [],
         submit: nil,
-        attributes: {
-          action: attributes[:action] || attributes[:url],
-          method: attributes[:method]
-        }.merge(attributes.except(:url, :method)),
-        form_options: {} # Добавляем пустой хэш с ключом :form_options
+        attributes: { action:, method: }.merge(attributes.except(:url, :method))
       }
     end
 
-    # def input(field_name, **attributes)
+    def input(name, options = {})
+      input_type = options.delete(:as) || :text
+      input_class = HexletCode::Inputs.const_get(input_type.to_s.capitalize)
+      @form_body[:inputs] << input_class.build(name, options)
+    end
+
+    def submit(value = 'Save')
+      @form_body[:submit] = { type: 'submit',  value: value }
+    end
+  end
+end
+
+ # def input(field_name, **attributes)
     #   as = attributes.delete(:as) || :text
     #   label_text = field_name.to_s.capitalize
     #   @form_body[:inputs] << { type: as.to_s, name: field_name, label: { value: label_text }, **attributes, class: attributes[:class] }
     # end
-    #
-    def input(name, options = {})
-      @form_body[:inputs] << build_input(name, options)
-    end
-
-    def submit(value = 'Save')
-      @form_body[:submit] = { value: value, type: 'submit' }
-    end
-
-    private
-
-    def build_input(name, options)
-      as = options.delete(:as) || :text
-      label_text = name.to_s.capitalize
-      { type: as.to_s, name: name, label: { value: label_text }, **options, class: options[:class] }
-    end
-  end
-end
