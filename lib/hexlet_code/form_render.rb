@@ -14,7 +14,8 @@ module HexletCode
     end
 
     def self.render_input(input)
-      type_input = "HexletCode::Inputs::#{input[:type].capitalize}Input".constantize
+      input_class = "HexletCode::Inputs::#{input[:type].capitalize}Input"
+      type_input = Object.const_get(input_class)
       next_input = type_input.new(input.except(:type))
       next_input.render({ input_label_separator: "\n    " })
     end

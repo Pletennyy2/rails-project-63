@@ -1,4 +1,4 @@
-# lib/hexlet_code/input.rb
+# lib/hexlet_code/inputs.rb
 
 module HexletCode
   module Inputs
