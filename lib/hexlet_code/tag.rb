@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # lib/hexlet_code/tag.rb
 
 module HexletCode
@@ -22,7 +24,7 @@ module HexletCode
     end
 
     def self.attributes_to_string(attributes)
-      attributes.to_a.map { |key, val| " #{key}=\"#{val}\"" }.join('')
+      attributes.to_a.map { |key, val| " #{key}=\"#{val}\"" }.join
     end
 
     private_class_method :build_single_tag, :build_pair_tag, :attributes_to_string

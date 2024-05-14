@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 #lib/hexlet_code/form_render.rb
 
 module HexletCode
   module FormRender
-
     def self.render_html(form_body)
       Tag.build(:form, form_body[:attributes]) do
         form_parts = form_body[:inputs].map { |input| render_input(input) }
 
-        form_parts << Tag.build(:input, type: 'submit', **form_body[:submit][:attributes]) unless form_body[:submit].nil?
+        form_parts << Tag.build(:input, type: 'submit', **form_body[:submit][:attributes]) \
+        unless form_body[:submit].nil?
 
         form_parts.any? ? "\n#{join_with_tabs(form_parts)}\n" : ''
       end

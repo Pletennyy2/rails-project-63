@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # lib/hexlet_code.rb
 
 require_relative 'hexlet_code/version'
