@@ -1,25 +1,28 @@
-# frozen_string_literal: true
+#lib/hexlet_code/form_render.rb
 
-# lib/hexlet_code/form_render.rb
 module HexletCode
-  class FormRender
-    def self.render_html(form_body)
-      form_attributes = form_body[:attributes] unless form_body[:attributes].nil?
-      inputs = form_body[:inputs].map { |input| render_input(input) }.join("\n") unless form_body[:inputs].nil?
-      submit = Tag.build('input', **form_body[:submit]) unless form_body[:submit].nil?
+  module FormRender
 
-      Tag.build('form', **form_attributes) { "#{inputs}\n#{submit}" }
+    def self.render_html(form_body)
+      Tag.build(:form, form_body[:attributes]) do
+        form_parts = form_body[:inputs].map { |input| render_input(input) }
+
+        form_parts << Tag.build(:input, type: 'submit', **form_body[:submit][:attributes]) unless form_body[:submit].nil?
+
+        form_parts.any? ? "\n#{join_with_tabs(form_parts)}\n" : ''
+      end
     end
 
     def self.render_input(input)
-      label = Tag.build('label', for: input[:name]) { input[:label][:value] }
-      input_tag = if input[:type] == :textarea
-        Tag.build('textarea', **input.except(:label)) { '' }
-      else
-        Tag.build('input', type: input[:type], **input.except(:label))
-      end
-
-      "#{label}\n#{input_tag}"
+      type_input = "HexletCode::Inputs::#{input[:type].capitalize}Input".constantize
+      next_input = type_input.new(input.except(:type))
+      next_input.render({ input_label_separator: "\n    " })
     end
+
+    def self.join_with_tabs(items)
+      items.map { |i| "    #{i}" }.join("\n")
+    end
+
+    private_class_method :render_input, :join_with_tabs
   end
 end

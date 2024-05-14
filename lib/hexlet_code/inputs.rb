@@ -1,25 +1,41 @@
-# lib/hexlet_code/inputs.rb
+# lib/hexlet_code/input.rb
 
 module HexletCode
   module Inputs
-    class String
-      def self.build(name, attributes)
-        label_text = name.to_s.capitalize
-        { type: "string", name: name, label: { value: label_text }, **attributes }
+    class BaseInput
+      def initialize(input)
+        @input = input.except(:label)
+        @label = input[:label]
+      end
+
+      def render(attributes = {})
+        separator = attributes.fetch(:input_label_separator, '')
+
+        [label, input].join(separator)
+      end
+
+      def label
+        Tag.build(:label, **@label.except(:value)) { @label[:value] }
       end
     end
 
-    class Text
-      def self.build(name, attributes)
-        label_text = name.to_s.capitalize
-        { type: "text", name: name, label: { value: label_text }, **attributes }
+    class StringInput < BaseInput
+      def input
+        name = @input[:name]
+        value = @input[:value]
+        attributes = @input[:attributes]
+
+        Tag.build(:input, name: name, type: 'text', value: value, **attributes)
       end
     end
 
-    class Textarea
-      def self.build(name, attributes)
-        label_text = name.to_s.capitalize
-        { type: "textarea", name: name, label: { value: label_text }, **attributes }
+    class TextInput < BaseInput
+      def input
+        name = @input[:name]
+        value = @input[:value]
+        attributes = @input[:attributes]
+
+        Tag.build(:textarea, name: name, cols: 20, rows: 40, **attributes) { value }
       end
     end
   end
