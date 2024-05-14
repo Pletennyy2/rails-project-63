@@ -1,6 +1,6 @@
 # lib/hexlet_code/form_builder.rb
 
-require 'active_support/inflector'
+require 'active_support/all'
 
 module HexletCode
   class FormBuilder
