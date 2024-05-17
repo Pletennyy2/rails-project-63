@@ -10,7 +10,7 @@ module HexletCode
         value = @input[:value]
         attributes = @input[:attributes]
 
-        Tag.build(:input, name: name, type: 'text', value: value, **attributes)
+        Tag.build(:input, name:, type: 'text', value:, **attributes)
       end
     end
   end

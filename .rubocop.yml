@@ -11,6 +11,9 @@ AllCops:
     - 'lib/hexlet_code/form_builder.rb'
     - 'lib/hexlet_code/form_render.rb'
     - 'lib/hexlet_code/inputs.rb'
+    - 'lib/hexlet_code/inputs/base_input.rb'
+    - 'lib/hexlet_code/inputs/string_input.rb'
+    - 'lib/hexlet_code/inputs/text_input.rb'
 
 # BEGIN
 Style/Documentation:

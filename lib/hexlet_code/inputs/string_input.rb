@@ -10,7 +10,7 @@ module HexletCode
         value = @input[:value]
         attributes = @input[:attributes]
 
-        Tag.build(:textarea, name: name, cols: 20, rows: 40, **attributes) { value }
+        Tag.build(:textarea, name:, cols: 20, rows: 40, **attributes) { value }
       end
     end
   end
