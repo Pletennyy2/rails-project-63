@@ -4,41 +4,8 @@
 
 module HexletCode
   module Inputs
-    class BaseInput
-      def initialize(input)
-        @input = input.except(:label)
-        @label = input[:label]
-      end
-
-      def render(attributes = {})
-        separator = attributes.fetch(:input_label_separator, '')
-
-        [label, input].join(separator)
-      end
-
-      def label
-        Tag.build(:label, **@label.except(:value)) { @label[:value] }
-      end
-    end
-
-    class StringInput < BaseInput
-      def input
-        name = @input[:name]
-        value = @input[:value]
-        attributes = @input[:attributes]
-
-        Tag.build(:input, name:, type: 'text', value:, **attributes)
-      end
-    end
-
-    class TextInput < BaseInput
-      def input
-        name = @input[:name]
-        value = @input[:value]
-        attributes = @input[:attributes]
-
-        Tag.build(:textarea, name:, cols: 20, rows: 40, **attributes) { value }
-      end
-    end
+    autoload(:BaseInput, 'hexlet_code/inputs/base_input')
+    autoload(:StringInput, 'hexlet_code/inputs/string_input.rb')
+    autoload(:TextInput, 'hexlet_code/inputs/text_input.rb')
   end
 end
